@@ -1,0 +1,4 @@
+index=windows_security sourcetype="WinEventLog:Security" EventCode=4720
+| rex field=Message "New Account:\s+Security ID:\s+[^\r\n]+\s+Account Name:\s+(?<created_user>[^\r\n]+)"
+| rex field=Message "Subject:\s+Security ID:\s+[^\r\n]+\s+Account Name:\s+(?<actor>[^\r\n]+)"
+| table _time host actor created_user Message

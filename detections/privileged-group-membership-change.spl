@@ -1,0 +1,2 @@
+index=windows_security sourcetype="WinEventLog:Security" (EventCode=4728 OR EventCode=4732 OR EventCode=4756)
+| table _time host EventCode Account_Name Message

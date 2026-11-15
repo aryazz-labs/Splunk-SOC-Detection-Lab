@@ -1,0 +1,6 @@
+index=windows_security sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+| search "EventID>1</EventID>"
+| rex field=_raw "Name='Image'>(?<process_image>[^<]+)</Data>"
+| rex field=_raw "Name='CommandLine'>(?<command_line>[^<]+)</Data>"
+| search process_image="*powershell.exe*"
+| table _time host process_image command_line
